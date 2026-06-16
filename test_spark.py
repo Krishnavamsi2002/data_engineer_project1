@@ -3,7 +3,7 @@ from pyspark.sql import functions as f
 import os
 import shutil
 
-# Create a stable local temp dir for Spark to use (avoids Windows Temp race/deletion issues)
+# Stable per-workspace temp directory to avoid Windows Temp race conditions
 _SPARK_LOCAL_TMP = os.path.join(os.getcwd(), "spark_local_tmp")
 os.makedirs(_SPARK_LOCAL_TMP, exist_ok=True)
 
@@ -22,7 +22,7 @@ finally:
     if 'spark' in locals() and spark:
         spark.stop()
 
-    # Try to remove the local temp directory we created. Ignore if already deleted.
+    # Best-effort cleanup of the local temp directory we created.
     try:
         shutil.rmtree(_SPARK_LOCAL_TMP)
     except FileNotFoundError:

@@ -4,6 +4,8 @@ data/bronze/
 data/silver/
 data/gold/
 
+.env
+
 *.pyc
 __pycache__/
 
