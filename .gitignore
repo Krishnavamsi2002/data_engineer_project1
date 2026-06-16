@@ -1,0 +1,10 @@
+venv/
+logs/
+data/bronze/
+data/silver/
+data/gold/
+
+*.pyc
+__pycache__/
+
+.vscode/
