@@ -8,6 +8,8 @@ from pyspark.sql import SparkSession
 from dotenv import load_dotenv
 from pathlib import Path
 
+print("Starting Kaggle dataset download and ingestion...")
+
 # Load environment variables
 load_dotenv(Path(".env"))   
 key = os.getenv("KAGGLE_KEY")
