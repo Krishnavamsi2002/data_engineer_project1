@@ -1,3 +1,5 @@
+#new future branch for kaggle download and ingestion and puhing to develop branch
+#giting code from kaggle branch and moving to develop branch
 import os
 import zipfile
 from pathlib import Path
@@ -6,9 +8,10 @@ from pyspark.sql import SparkSession
 from dotenv import load_dotenv
 from pathlib import Path
 
+print("Starting Kaggle dataset download and ingestion...")
+
 # Load environment variables
 load_dotenv(Path(".env"))   
-
 key = os.getenv("KAGGLE_KEY")
 username = os.getenv("KAGGLE_USERNAME")
 
