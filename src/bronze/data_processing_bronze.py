@@ -18,21 +18,25 @@ def load_data():
     return data_frame
 
 def process_data_per_month(df):
-    df=df.withColumn("Month_name",F.date_format("Date", "MMMM")) 
+    tup=(("Transaction ID", "Transaction_ID"),("Product Category", "Product_Category"),("Customer ID", "Customer_ID"),\
+         ("Price per Unit", "Price_per_Unit"),("Total Amount", "Total_Amount"))
+    for old_col, new_col in tup:
+        df=df.withColumnRenamed(old_col, new_col)
 
-    df=df.groupBy("Month_name").agg(F.sum("Total Amount").alias("Total_Sales_per_Month"))
+    df=df.withColumn("Month_name",F.date_format("Date", "MMMM")) 
     df.show(5)
+   
     return df
 
 def save_data(df):
     output_path = Path("data/bronze/processed_data")
     output_path.mkdir(parents=True, exist_ok=True)
-    df.write.csv(str(output_path), header=True, mode="overwrite")
+    df.write.csv(str(output_path),header=True, mode="overwrite")
 
 def main():
     df = load_data()
     processed_df = process_data_per_month(df)
-    #save_data(processed_df)
+    save_data(processed_df)
 
 if __name__ == "__main__":
     main()
