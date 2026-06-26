@@ -35,22 +35,14 @@ def process_data_per_month(df):
     return df
 
 def save_data(df):
-    output_path = "D:\\projects\\data-engineering-project\\data\\bronze\\processed_data"
+    output_path = "D:\\projects\\data-engineering-project\\data\\bronze\\processed_data.csv"
     print(f"Saving processed data to form save_data: {output_path}")
     print(f"DataFrame row count: {df.count()}")
-    row_count = df.count()
     df.show(5)
-    
-    if row_count > 0:
-        try:
-            print("Data saving!")
-            df.coalesce(1).write.csv(str(output_path), header=True, mode="overwrite")
-            print("Data saved successfully!")
-            print(f"Files saved to: {output_path}")
-        except Exception as e:
-            print(f"ERROR during write: {type(e).__name__}: {e}")
-            import traceback
-            traceback.print_exc()
+    if df.count() > 0:
+        
+        df.coalesce(1).write.csv(str(output_path), header=True, mode="overwrite")
+        print("Data saved successfully!")
     else:
         print("ERROR: DataFrame is empty! No data to save.")
 
