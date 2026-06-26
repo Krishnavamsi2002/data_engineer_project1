@@ -10,7 +10,7 @@ def load_data():
         .master("local[*]") \
         .getOrCreate()  
     
-    path = Path("D:\\projects\\data-engineering-project\\data\\bronze\\processed_data.csv")
+    gipath = Path("D:\\projects\\data-engineering-project\\data\\bronze\\processed_data.csv")
     #path = Path("D:\\projects\\data-engineering-project\\data\\raw\\retail_sales_dataset.csv")
     data_frame = spark.read.csv(str(path),
        header=True,
